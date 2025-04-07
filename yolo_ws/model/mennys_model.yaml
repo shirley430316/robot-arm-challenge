@@ -1,0 +1,10 @@
+# mennys_model.yaml
+obb: True               # 必须设置为True表示旋转框任务
+angle_range: 180        # 必须与训练时一致(通常是180)
+path: "C:/Users/Administrator/Desktop/HKU/roboarm/yolo_ws/model/model.pt"  # Link to weights (optional)
+names: 
+  0: big
+  1: board
+  2: box
+  3: circle
+  4: small

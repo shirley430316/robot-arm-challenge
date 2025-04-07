@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['M4x30 Screw', 'M6 Hex Lock Nut', 'M6x40 Screw']
+
+roboflow:
+  workspace: sincerely331
+  project: bolt-nut-gqy5e
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/sincerely331/bolt-nut-gqy5e/dataset/3

@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['big', 'circle', 'small']
+
+roboflow:
+  workspace: mike-xsued
+  project: roboarm-bi27c
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/mike-xsued/roboarm-bi27c/dataset/3

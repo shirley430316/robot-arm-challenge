@@ -1,0 +1,5 @@
+numpy>=1.19.0
+opencv-python>=4.5.0
+ultralytics>=8.0.0
+# Note: pyrealsense2 must be installed after installing Intel RealSense SDK 2.0
+# Download from: https://github.com/IntelRealSense/librealsense/releases 

@@ -1,0 +1,10 @@
+train: train/images
+val: valid/images
+test: test/images
+
+names: 
+  0: big
+  1: board
+  2: box
+  3: circle
+  4: small
