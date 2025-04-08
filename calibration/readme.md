@@ -2,7 +2,7 @@
 
 To begin calibration, run:
 ```bash
-python base_camera_pos.py
+python base_camera_pos-v2.py
 ```
 During calibration:
 
