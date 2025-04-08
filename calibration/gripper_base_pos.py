@@ -2,11 +2,11 @@ import numpy as np
 from math import cos, sin, radians
 from pydobotplus import dobotplus as dobot
 
-def get_gripper_transform_matrix(device=None, port='COM3', independent=False):
+def get_gripper_transform_matrix(device=None, port='COM7', independent=False):
 
     if device is None:
         # Initialize Dobot (now correctly calling the class)
-        robot = dobot.Dobot(port="COM3")
+        robot = dobot.Dobot(port="COM7")
     else:
         robot = device
 
@@ -20,12 +20,12 @@ def get_gripper_transform_matrix(device=None, port='COM3', independent=False):
         robot.close()
 
     # Convert rotation angle (degrees → radians)
-    r = radians(r_deg)
+    r = np.arctan(y/x)
 
     # Construct rotation matrix (Z-axis only)
     R = np.array([
-        [cos(r), -sin(r), 0],
-        [sin(r),  cos(r), 0],
+        [cos(r), sin(r), 0],
+        [-sin(r),  cos(r), 0],
         [0,      0,      1]
     ])
 
@@ -41,6 +41,6 @@ def get_gripper_transform_matrix(device=None, port='COM3', independent=False):
     return H
 
 if __name__ == "__main__":
-    H = get_gripper_transform_matrix(port='COM3')  # Replace with your port
+    H = get_gripper_transform_matrix(port='COM7')  # Replace with your port
     print("Homogeneous Transformation Matrix (Gripper to Base):")
     print(np.round(H, 3))  # Round for readability
