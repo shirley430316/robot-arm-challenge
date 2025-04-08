@@ -33,7 +33,7 @@ at_detector = Detector(
 )
 
 TAG_SIZE = 0.1  # Size of the AprilTag in meters
-
+''''
 # Configure RealSense pipeline
 pipeline = rs.pipeline()
 config = rs.config()
@@ -54,6 +54,8 @@ camera_matrix = np.array([
 ])
 
 print(f"Camera parameters: fx={intr.fx:.2f}, fy={intr.fy:.2f}, cx={intr.ppx:.2f}, cy={intr.ppy:.2f}")
+'''
+
 
 from collections import deque
 
@@ -78,11 +80,11 @@ def is_stabilized(transform_history, threshold=0.001, window_size=10):
     # Check if all recent differences are below threshold
     return all(d < threshold for d in diffs[-window_size:])
 
-def find_apriltag_transform(independent=False):
+def find_apriltag_transform(independent=False, pipeline=None, camera_matrix=None, camera_params=None):
     "if calling this function outside this file, set independent=False, otherwise pipeline would be stopped"
     try:
         # Parameters
-        STABILITY_THRESHOLD = 0.005  # Threshold for considering the tag stable
+        STABILITY_THRESHOLD = 1  # Threshold for considering the tag stable
         STABILITY_WINDOW = 15        # Number of frames to check for stability
         transform_history = deque(maxlen=STABILITY_WINDOW)
         stable_transform = None
@@ -113,7 +115,7 @@ def find_apriltag_transform(independent=False):
             for tag in tags:
                 if tag.pose_R is not None and tag.pose_t is not None:
                     current_tag_id = tag.tag_id
-                    current_transform = create_4x4_transform_matrix(tag.pose_R, tag.pose_t * 1000)  # Convert to mm
+                    current_transform = create_4x4_transform_matrix(tag.pose_R.T, - tag.pose_R.T @ tag.pose_t * 1000)  # Convert to mm
                     
                     # Visualization
                     for idx in range(len(tag.corners)):
@@ -154,7 +156,7 @@ def find_apriltag_transform(independent=False):
                     print("4x4 Transformation Matrix:")
                     print(stable_transform)
                     break  # Exit the loop once stable transform is found
-            
+
             # Display the image
             cv2.imshow('AprilTag Pose Estimation', color_image)
             
@@ -164,6 +166,7 @@ def find_apriltag_transform(independent=False):
     finally:
         if independent:
             pipeline.stop()
+            print("Pipeline stopped.")
             cv2.destroyAllWindows()
     
     # Return the stable transformation matrix
