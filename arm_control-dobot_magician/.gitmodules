@@ -1,0 +1,3 @@
+[submodule "pydobotplus"]
+	path = pydobotplus
+	url = https://github.com/sammydick22/pydobotplus.git
