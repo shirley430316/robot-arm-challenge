@@ -9,13 +9,13 @@ import numpy as np
 import glob
 
 # Load the model
-model = YOLO("C:/Users/Administrator/Desktop/HKU/roboarm/yolo_ws/model/mennys_model2.pt")  # Must be an OBB model
+model = YOLO(os.path.join(os.path.dirname(__file__), "model", "mennys_model3.pt"))  # Must be an OBB model
 
 # 指定输入图像文件夹路径
-input_image_dir = "C:/Users/Administrator/Desktop/HKU/roboarm/yolo_ws/dataset/dataset8/test/images"
+input_image_dir = os.path.join(os.path.dirname(__file__), "dataset", "test")
 
 # 指定输出图像保存路径
-output_dir = "C:/Users/Administrator/Desktop/HKU/roboarm/yolo_ws/output"
+output_dir = os.path.join(os.path.dirname(__file__), "output")
 os.makedirs(output_dir, exist_ok=True)  # 确保输出目录存在
 
 # 获取所有图片文件

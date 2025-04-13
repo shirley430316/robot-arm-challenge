@@ -4,11 +4,11 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'  # Add this FIRST
 from ultralytics import YOLO
 
 # Load current model as pretrained model
-model = YOLO("C:/Users/Administrator/Desktop/HKU/roboarm/yolo_ws/model/mennys_model2.pt")
+model = YOLO(os.path.join(os.path.dirname(__file__), "model", "mennys_model2.pt"))
 
 # Train with small-dataset optimizations
 results = model.train(
-    data='C:/Users/Administrator/Desktop/HKU/roboarm/yolo_ws/dataset/dataset8/data.yaml',
+    data=os.path.join(os.path.dirname(__file__), "dataset", "dataset9", "data.yaml"),
     epochs=40,  # 小数据可以增加epochs
     batch=8,     # 根据GPU内存调整
     imgsz=640,
@@ -32,7 +32,7 @@ results = model.train(
 )
 
 # Save the new model with a different name to avoid overwriting
-model.save("C:/Users/Administrator/Desktop/HKU/roboarm/yolo_ws/model/mennys_model3.pt")
+model.save(os.path.join(os.path.dirname(__file__), "model", "mennys_model3.pt"))
 
 
 
